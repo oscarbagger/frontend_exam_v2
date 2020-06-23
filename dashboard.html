@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <script
+      src="https://kit.fontawesome.com/c0ab951e8e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/static/style.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <main>
+      <h1 id="barName">Foobar</h1>
+      <h3 id="closingTime"></h3>
+      <section id="orders">
+        <div id="queue">
+          <h2>Queue</h2>
+          <div id="queueContainer"></div>
+        </div>
+        <div id="serving">
+          <h2>Serving</h2>
+          <div id="servingContainer"></div>
+        </div>
+      </section>
+      <section id="bartenders">
+        <div class="bartender">
+          <img src="" alt="bartender_img" />
+          <p class="bartender_name"></p>
+          <p class="bartender_serving"></p>
+          <p class="bartender_tap"></p>
+        </div>
+      </section>
+      <section id="taps"></section>
+    </main>
+    <template id="queue_temp">
+      <div class="queueItem">
+        <p class="queueItem_id"></p>
+      </div>
+    </template>
+    <template id="tap_temp">
+      <div class="tapItem">
+        <p class="tapItem_id"></p>
+        <p class="tapItem_beer"></p>
+        <div class="tapItem_levelBar">
+          <div class="levelBar_level"></div>
+        </div>
+        <p class="tapItem_level"></p>
+        <p class="tapItem_inUse"></p>
+      </div>
+    </template>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <script
+      src="https://kit.fontawesome.com/c0ab951e8e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/static/style.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Order form</title>
+  </head>
+  <body>
+    <main>
+      <form>
+        <fieldset id="orderBeer">
+          <legend>Order Beer</legend>
+          <div id="beerList"></div>
+        </fieldset>
+        <fieldset id="payment">
+          <legend>Payment</legend>
+          <div>
+            <h3>Your Order</h3>
+            <table id="order_items">
+              <tr>
+                <td class="order_beerName">Movintime</td>
+                <td>
+                  <input
+                    type="number"
+                    value="1"
+                    min="1"
+                    max="99"
+                    class="beerAmount"
+                  />
+                </td>
+                <td>
+                  <input type="button" value="-" class="beerSubtract" />
+                </td>
+                <td>
+                  <input type="button" value="+" class="beerAdd" />
+                </td>
+                <td>
+                  <input type="button" value="Remove" class="beerRemove" />
+                </td>
+              </tr>
+              <tr>
+                <td class="order_beerName">Santa</td>
+                <td>
+                  <input
+                    type="number"
+                    value="1"
+                    min="1"
+                    max="99"
+                    class="beerAmount"
+                  />
+                </td>
+                <td>
+                  <input type="button" value="-" class="beerSubtract" />
+                </td>
+                <td>
+                  <input type="button" value="+" class="beerAdd" />
+                </td>
+                <td>
+                  <input type="button" value="Remove" class="beerRemove" />
+                </td>
+              </tr>
+            </table>
+            <p id="orderTotal">Total: 99.00$</p>
+          </div>
+          <h3>Payment details</h3>
+          <label for="cardNumber">Card Number</label>
+          <input
+            type="text"
+            id="cardNumber"
+            pattern="[0-9]"
+            placeholder="•••• •••• •••• ••••"
+          />
+          <label for="expire">Expiration</label>
+          <div class="paymentExpiration">
+            <input type="number" placeholder="mm" id="expire" max="12" />
+            <input type="number" placeholder="yy" id="expire" max="99" />
+          </div>
+          <label for="cvc">CVC</label>
+          <input type="text" id="cvc" pattern="[0-9]" placeholder="•••" />
+          <input type="submit" value="Buy" />
+        </fieldset>
+      </form>
+    </main>
+    <template>
+      <div class="beer">
+        <div class="col">
+          <img class="beerLabel" src="" alt="" />
+          <p class="beerAlc"></p>
+        </div>
+        <div class="colRight">
+          <h3 class="beerName"></h3>
+          <p class="beerDesc"></p>
+          <div class="beerButtons">
+            <input type="button" value="-" class="beerSubtract" />
+            <input
+              type="number"
+              value="1"
+              min="1"
+              max="99"
+              class="beerAmount"
+            />
+            <input type="button" value="+" class="beerAdd" />
+            <input type="button" value="Add" class="beerOrder" />
+          </div>
+        </div>
+        <!--<input type="button" value="i" class="beerInfo" /> -->
+      </div>
+    </template>
+    <template id="order_listItem">
+      <tr>
+        <td class="order_beerName"></td>
+        <td>
+          <input type="number" value="1" min="1" max="99" class="beerAmount" />
+        </td>
+        <td>
+          <input type="button" value="-" class="beerSubtract" />
+        </td>
+        <td>
+          <input type="button" value="+" class="beerAdd" />
+        </td>
+        <td>
+          <input type="button" value="Remove" class="beerRemove" />
+        </td>
+      </tr>
+    </template>
+    <script src="form.js"></script>
+  </body>
+</html>
