@@ -25,7 +25,7 @@ label {
 
 input {
   font-family: $font;
-  transition: 0.3s linear;
+  transition: 0.1s linear;
 }
 
 input:focus {
@@ -53,8 +53,11 @@ input[type="submit"] {
   font-size: 1.8rem;
   color: $txtColor;
   font-family: $displayFont;
-  border: 2px solid $bgColor;
+  /* border: 2px solid $bgColor; */
   outline: 2px solid $activeColor;
+}
+input[type="submit"]:focus {
+  border: 2px solid $bgColor;
 }
 
 legend {
@@ -115,13 +118,10 @@ fieldset {
 }
 
 #payment {
-  width: 100%;
+  display: none;
   height: 90vh;
-  position: fixed;
-  bottom: 0;
   background-color: $bgColor;
-  border-top: 4px solid $activeColor;
-  transition: 0.4s ease-in-out;
+  transition: 0.2s ease-in-out;
   padding: 2px 10px 0px 10px;
   text-align: center;
   color: $txtColor;
@@ -135,20 +135,47 @@ fieldset {
   }
 }
 
+#orderNav {
+  position: fixed;
+  height: 8vh;
+  width: 100%;
+  bottom: 0px;
+  transition: 0.2s ease-in-out;
+  padding: 2px 10px 0px 10px;
+  text-align: center;
+  color: $txtColor;
+  background-color: $bgColor;
+  border-top: 3px solid $activeColor;
+  #orderNavPayment {
+    display: none;
+  }
+}
+
+#orderNav:hover {
+  cursor: pointer;
+  color: $activeColor;
+}
+
 /****** Dashboard ******/
 
 #orders {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   text-align: left;
-  width: 50%;
+  width: 100%;
+  min-height: 40vh;
+  div {
+    flex-basis: 1;
+  }
 }
 
 .queueItem {
   transition: 0.2s linear;
+  border: 1px solid $txtColor;
+  padding: 4px;
 }
 
 #taps {
+  padding-top: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 5px;

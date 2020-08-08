@@ -7,6 +7,10 @@ const settings = settingsObject();
 
 let beerInOrder = [];
 
+const orderNav = document.querySelector("#orderNav");
+const orderBeer = document.querySelector("#orderBeer");
+const orderPayment = document.querySelector("#payment");
+
 /*
 function BeerOrder(beerArr, id) {
   beerInOrder = beerArr;
@@ -20,6 +24,24 @@ function BeerOrder(beerArr, id) {
 
 function start() {
   getJsonData();
+  orderNav.addEventListener("click", () => {
+    if (orderBeer.style.display == "block") {
+      orderBeer.style.display = "none";
+      orderPayment.style.display = "block";
+      orderNav.querySelector("#orderNavPayment").style.display = "block";
+      orderNav.querySelector("#orderNavBeer").style.display = "none";
+      setupOrder();
+    } else {
+      orderBeer.style.display = "block";
+      orderPayment.style.display = "none";
+      orderNav.querySelector("#orderNavPayment").style.display = "none";
+      orderNav.querySelector("#orderNavBeer").style.display = "block";
+    }
+  });
+}
+
+function setupOrder() {
+  console.log("generating order");
 }
 
 function submitFormData() {
@@ -66,6 +88,8 @@ function showBeers() {
     document.querySelector("#beerList").appendChild(clone);
   });
 }
+
+function addToOrder() {}
 
 async function getJsonData() {
   const response = await fetch(settings.beers + "?max=100", {

@@ -69,7 +69,27 @@ function showQueue() {
   let qItemList = jsonData.queue;
   qItemList.forEach((q) => {
     let clone = temp.cloneNode(true).content;
-    clone.querySelector(".queueItem_id").textContent = q.id;
+    clone.querySelector(".queueItem_id").textContent = "#" + q.id;
+    let beerArr = q.order;
+    let beernamesInOrder = [];
+    let pList = [];
+    beerArr.forEach((b) => {
+      if (beernamesInOrder.includes(b)) {
+        // find p with same name
+        let occurenceNumber = getOccurrence(beernamesInOrder, b);
+        pList.forEach((p) => {
+          if (b == p.textContent) {
+            p.textContent = occurenceNumber + 1 + "x " + b;
+          }
+        });
+      } else {
+        let p = document.createElement("p");
+        p.textContent = b;
+        clone.querySelector(".queueItem").appendChild(p);
+        pList.push(p);
+      }
+      beernamesInOrder.push(b);
+    });
     queueContainer.appendChild(clone);
   });
 }
@@ -82,9 +102,33 @@ function showServing() {
   let servItemList = jsonData.serving;
   servItemList.forEach((q) => {
     let clone = temp.cloneNode(true).content;
-    clone.querySelector(".queueItem_id").textContent = q.id;
+    clone.querySelector(".queueItem_id").textContent = "#" + q.id;
+    let beerArr = q.order;
+    let beernamesInOrder = [];
+    let pList = [];
+    beerArr.forEach((b) => {
+      if (beernamesInOrder.includes(b)) {
+        // find p with same name
+        let occurenceNumber = getOccurrence(beernamesInOrder, b);
+        pList.forEach((p) => {
+          if (b == p.textContent) {
+            p.textContent = occurenceNumber + 1 + "x " + b;
+          }
+        });
+      } else {
+        let p = document.createElement("p");
+        p.textContent = b;
+        clone.querySelector(".queueItem").appendChild(p);
+        pList.push(p);
+      }
+      beernamesInOrder.push(b);
+    });
     servContainer.appendChild(clone);
   });
+}
+
+function getOccurrence(array, value) {
+  return array.filter((v) => v === value).length;
 }
 
 function showTaps() {
@@ -131,7 +175,6 @@ async function updateData() {
     },
   });
   jsonData = await response.json();
-  console.log(jsonData.taps);
   updateTaps();
   showQueue();
   showServing();
