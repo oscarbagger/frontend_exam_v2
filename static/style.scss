@@ -156,6 +156,21 @@ fieldset {
   color: $activeColor;
 }
 
+#addedToOrder {
+  text-align: center;
+  color: $txtColor;
+  position: fixed;
+  bottom: 8vh;
+  width: 100%;
+  background-color: $activeColor;
+  transform: scaleY(0);
+  transform-origin: 0% 100%;
+}
+
+.orderCheck {
+  animation: 1 2s ease-in-out orderCheckAnim;
+}
+
 /****** Dashboard ******/
 
 #orders {
@@ -202,5 +217,24 @@ fieldset {
       height: 80%;
       transition: 0.5s ease-out;
     }
+  }
+}
+
+@keyframes orderCheckAnim {
+  0% {
+    transform: scaleY(0);
+    transform-origin: 0% 100%;
+  }
+  25% {
+    transform: scaleY(1);
+    transform-origin: 0% 100%;
+  }
+  75% {
+    transform: scaleY(1);
+    transform-origin: 0% 100%;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: 0% 100%;
   }
 }

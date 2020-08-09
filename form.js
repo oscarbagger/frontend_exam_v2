@@ -6,6 +6,11 @@ let jsonData = [];
 const settings = settingsObject();
 
 let beerInOrder = [];
+let order = [];
+let showingBeers = true;
+
+const orderItemTemplate = document.querySelector("#order_listItem");
+const orderItemTable = document.querySelector("#order_items");
 
 const orderNav = document.querySelector("#orderNav");
 const orderBeer = document.querySelector("#orderBeer");
@@ -25,14 +30,16 @@ function BeerOrder(beerArr, id) {
 function start() {
   getJsonData();
   orderNav.addEventListener("click", () => {
-    if (orderBeer.style.display == "block") {
+    if (showingBeers) {
+      showingBeers = false;
       orderBeer.style.display = "none";
       orderPayment.style.display = "block";
       orderNav.querySelector("#orderNavPayment").style.display = "block";
       orderNav.querySelector("#orderNavBeer").style.display = "none";
       setupOrder();
     } else {
-      orderBeer.style.display = "block";
+      showingBeers = true;
+      orderBeer.style.display = "flex";
       orderPayment.style.display = "none";
       orderNav.querySelector("#orderNavPayment").style.display = "none";
       orderNav.querySelector("#orderNavBeer").style.display = "block";
@@ -42,17 +49,19 @@ function start() {
 
 function setupOrder() {
   console.log("generating order");
+
+  let temp = orderItemTemplate;
+
+  document.querySelector("#buy").addEventListener("click", () => {
+    submitFormData();
+  });
 }
 
 function submitFormData() {
-  //event.preventDefault();
-  /*const elements = HTML.form.elements;
-    user.name = elements.name.value;
-    user.email = elements.email.value;
-    user.company = elements.company.value;
-    order.beerInOrder = beerInOrder;
-    console.log(user);
-    post(order); */
+  event.preventDefault();
+  order.beerInOrder = beerInOrder;
+  console.log(order);
+  post(order);
 }
 
 function showBeers() {
@@ -84,6 +93,14 @@ function showBeers() {
       }
       amount.value = 1;
       console.log(beerInOrder);
+      document.querySelector("#addedToOrder").classList.add("orderCheck");
+      document
+        .querySelector("#addedToOrder")
+        .addEventListener("animationend", () => {
+          document
+            .querySelector("#addedToOrder")
+            .classList.remove("orderCheck");
+        });
     });
     document.querySelector("#beerList").appendChild(clone);
   });

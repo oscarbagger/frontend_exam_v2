@@ -17,6 +17,10 @@
   </head>
   <body>
     <main>
+      <div id="addedToOrder">
+        <h3>Added to order</h3>
+        <span style="font-size: 24px;"> <i class="fas fa-check"></i></span>
+      </div>
       <div id="orderNav">
         <div id="orderNavBeer">
           <h3>Go to payment</h3>
@@ -41,6 +45,7 @@
           <div>
             <h3>Your Order</h3>
             <table id="order_items">
+              <!--
               <tr>
                 <td class="order_beerName">Movintime</td>
                 <td>
@@ -83,6 +88,7 @@
                   <input type="button" value="Remove" class="beerRemove" />
                 </td>
               </tr>
+              -->
             </table>
             <p id="orderTotal">Total: 99.00$</p>
           </div>
@@ -93,15 +99,34 @@
             id="cardNumber"
             pattern="[0-9]"
             placeholder="•••• •••• •••• ••••"
+            required
           />
           <div class="paymentExpiration">
             <label for="expire">Expiration</label>
-            <input type="number" placeholder="mm" id="expire" max="12" />
-            <input type="number" placeholder="yy" id="expire" max="99" />
+            <input
+              type="number"
+              placeholder="mm"
+              id="expire"
+              max="12"
+              required
+            />
+            <input
+              type="number"
+              placeholder="yy"
+              id="expire"
+              max="99"
+              required
+            />
           </div>
           <label for="cvc">CVC</label>
-          <input type="text" id="cvc" pattern="[0-9]" placeholder="•••" />
-          <input type="submit" value="Buy" />
+          <input
+            type="text"
+            id="cvc"
+            pattern="[0-9]"
+            placeholder="•••"
+            required
+          />
+          <input type="submit" value="Buy" id="buy" />
         </fieldset>
       </form>
     </main>
