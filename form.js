@@ -65,10 +65,6 @@ function setupOrder() {
           UpdateOrderInfo();
         }
       });
-      /*clone.querySelector(".beerRemove").addEventListener("click", () => {
-        clone.remove();
-        UpdateOrderInfo();
-      }); */
       beerNamesInOrder.push(beer);
       orderItemTable.appendChild(clone);
       orderItemTable.lastElementChild

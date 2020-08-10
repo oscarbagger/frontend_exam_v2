@@ -41,11 +41,8 @@ class ProtoTap {
       ".levelBar_level"
     ).style.height = this.percentFilled;
     if (this.inUse == true) {
-      //this.DOMContainer.querySelector(".tapItem_inUse").textContent = "active";
       this.DOMContainer.style.border = " 2px solid #388C42";
     } else {
-      //this.DOMContainer.querySelector(".tapItem_inUse").textContent =
-      ("inactive");
       this.DOMContainer.style.border = " 1px solid #eeedef";
     }
   }
