@@ -16,7 +16,8 @@ body {
 
 p,
 li,
-label {
+label,
+td {
   color: $txtColor;
   font-family: $font;
 }

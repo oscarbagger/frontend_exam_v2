@@ -193,48 +193,8 @@ async function getJsonData() {
   jsonData = await response.json();
   showQueue();
   showServing();
-  TapsToClass();
+  TapsTgeoClass();
   setTimeout(() => {
     updateData();
   }, updateTime);
-}
-
-async function post(data) {
-  const postData = JSON.stringify(data);
-  const response = await fetch(settings.endpoint, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": settings.apiKey,
-      "cache-control": "no-cache",
-    },
-    body: postData,
-  });
-  console.log(await response.json());
-}
-
-async function deleteIt(id) {
-  const response = await fetch(settings.endpoint + "/" + id, {
-    method: "delete",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": settings.apiKey,
-      "cache-control": "no-cache",
-    },
-  });
-  console.log(await response.json());
-}
-
-async function put(id, data) {
-  let postData = JSON.stringify(data);
-  const response = await fetch(settings.endpoint + "/" + id, {
-    method: "put",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": settings.apiKey,
-      "cache-control": "no-cache",
-    },
-    body: postData,
-  });
-  console.log(await response.json());
 }

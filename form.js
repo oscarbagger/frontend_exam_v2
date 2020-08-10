@@ -15,17 +15,7 @@ const orderItemTable = document.querySelector("#order_items");
 const orderNav = document.querySelector("#orderNav");
 const orderBeer = document.querySelector("#orderBeer");
 const orderPayment = document.querySelector("#payment");
-
-/*
-function BeerOrder(beerArr, id) {
-  beerInOrder = beerArr;
-  this.cardtext = text;
-  this.points = points;
-  this.id = id;
-  amountOFType(type) {
-    
-  }
-} */
+const orderTotal = document.querySelector("#orderTotal");
 
 function start() {
   getJsonData();
@@ -48,9 +38,47 @@ function start() {
 }
 
 function setupOrder() {
+  UpdatePrice();
   console.log("generating order");
-
+  orderItemTable.innerHTML = "";
   let temp = orderItemTemplate;
+  let beerNamesInOrder = [];
+  beerInOrder.forEach((beer) => {
+    if (beerNamesInOrder.includes(beer)) {
+      let orderItems = orderItemTable.querySelectorAll(".order_beer");
+      orderItems.forEach((i) => {
+        if (i.querySelector(".order_beerName").textContent == beer) {
+          i.querySelector(".beerAmount").value++;
+        }
+      });
+    } else {
+      let clone = temp.cloneNode(true).content;
+      let amount = clone.querySelector(".beerAmount");
+      clone.querySelector(".order_beerName").textContent = beer;
+      clone.querySelector(".beerAdd").addEventListener("click", () => {
+        amount.value++;
+        UpdateOrderInfo();
+      });
+      clone.querySelector(".beerSubtract").addEventListener("click", () => {
+        if (amount.value > 1) {
+          amount.value--;
+          UpdateOrderInfo();
+        }
+      });
+      /*clone.querySelector(".beerRemove").addEventListener("click", () => {
+        clone.remove();
+        UpdateOrderInfo();
+      }); */
+      beerNamesInOrder.push(beer);
+      orderItemTable.appendChild(clone);
+      orderItemTable.lastElementChild
+        .querySelector(".beerRemove")
+        .addEventListener("click", () => {
+          orderItemTable.lastElementChild.remove();
+          UpdateOrderInfo();
+        });
+    }
+  });
 
   document.querySelector("#buy").addEventListener("click", () => {
     submitFormData();
@@ -62,6 +90,27 @@ function submitFormData() {
   order.beerInOrder = beerInOrder;
   console.log(order);
   post(order);
+}
+
+function UpdateOrderInfo() {
+  beerInOrder = [];
+  let orderItems = orderItemTable.querySelectorAll(".order_beer");
+  orderItems.forEach((i) => {
+    let name = i.querySelector(".order_beerName").textContent;
+    let val = i.querySelector(".beerAmount").value;
+    let n = val;
+    while (n > 0) {
+      beerInOrder.push(name);
+      n--;
+    }
+  });
+  console.log(beerInOrder);
+  UpdatePrice();
+}
+
+function UpdatePrice() {
+  // each beer is just 5$ for now
+  orderTotal.textContent = "Total: " + beerInOrder.length * 5 + ".00$";
 }
 
 function showBeers() {
@@ -124,32 +173,6 @@ async function post(data) {
   const postData = JSON.stringify(data);
   const response = await fetch(settings.endpoint, {
     method: "post",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": settings.apiKey,
-      "cache-control": "no-cache",
-    },
-    body: postData,
-  });
-  console.log(await response.json());
-}
-
-async function deleteIt(id) {
-  const response = await fetch(settings.endpoint + "/" + id, {
-    method: "delete",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": settings.apiKey,
-      "cache-control": "no-cache",
-    },
-  });
-  console.log(await response.json());
-}
-
-async function put(id, data) {
-  let postData = JSON.stringify(data);
-  const response = await fetch(settings.endpoint + "/" + id, {
-    method: "put",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "x-apikey": settings.apiKey,
