@@ -190,7 +190,7 @@ async function getJsonData() {
   jsonData = await response.json();
   showQueue();
   showServing();
-  TapsTgeoClass();
+  TapsToClass();
   setTimeout(() => {
     updateData();
   }, updateTime);
